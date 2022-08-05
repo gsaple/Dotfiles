@@ -41,3 +41,9 @@ set fish_color_cancel brred
 alias l='exa -al --color=always --group-directories-first'
 alias d='edit_dot.sh'
 alias c="source $HOME/mybin/cdir.sh"
+alias gc='git commit -m'
+alias gs='git status'
+alias gl='git log --pretty=oneline'
+alias gp='git push'
+alias ga='git add .'
+alias gd='git diff'
