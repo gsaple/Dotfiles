@@ -10,7 +10,7 @@ set -U fish_greeting
 
 # set prompt
 function fish_prompt
-    set_color bryellow
+    set_color "#ffc800"
     echo -n '❯ '
 end
 
@@ -29,15 +29,13 @@ bind , accept-autosuggestion
 bind \e\[C forward-single-char
 bind \ck kill-whole-line
 
-# add some syntax highlighting
-set fish_color_command brmagenta
-set fish_color_param brcyan
-set fish_color_keyword brmagenta --italics --bold
-set fish_color_comment white
-set fish_color_error brred
-set fish_color_cancel brred
+# add some gruvbox syntax highlighting
+set fish_color_command "#d3869b"
+set fish_color_param "#8ec07c"
+set fish_color_keyword "#d3869b" --italics --bold
+set fish_color_comment "#a89984"
+set fish_color_error "#fb4934"
+set fish_color_cancel "#fb4934"
 
 # alias
 alias l='exa -al --color=always --group-directories-first'
-alias d='edit_dot.sh'
-alias c="source $HOME/mybin/cdir.sh"
