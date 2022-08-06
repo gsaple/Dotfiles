@@ -6,8 +6,13 @@ export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_CACHE_HOME="$HOME/.cache"
 export PATH="$HOME/mybin:$PATH"
 export EDITOR=nvim
-export FZF_DEFAULT_OPTS="
---border --info=inline --height=50% --prompt=' ' --pointer='|>' --margin 5% --color='bg+:blue,gutter:black,pointer:red,border:blue'"
+
+# fzf interface
+export FZF_DEFAULT_OPTS="--border --info=inline --height=50% --prompt=' ' --pointer='|>' --margin 5% --color='bg+:blue,gutter:black,pointer:red,border:blue'"
+
+# colourful manpages, see less manual
+export GROFF_NO_SGR=1
+export MANPAGER="less -R --use-color -Dd+y -Du+b -s -M +Gg"
 
 # startup programs
 # get some status bar data in the background
