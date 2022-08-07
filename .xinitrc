@@ -8,7 +8,7 @@ xrandr --output HDMI-1 --auto --pos 0x0 --output LVDS-1 --auto --right-of HDMI-1
 # picom --experimental-backends &
 
 # randomise wallpaper
-wallpaper.sh &
+wallpaper.sh r &
 
 # load time bar
 toggle_bar.sh
