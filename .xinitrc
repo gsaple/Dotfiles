@@ -13,12 +13,13 @@ wallpaper.sh r &
 # load time bar
 toggle_bar.sh
 
-# change CapsLock to Control
+# swap CapsLock to Control_R
 [[ -f ~/.Xmodmap ]] && xmodmap ~/.Xmodmap
 
-# Control mod key when it is pressed together with other key
-# Escape key when it is pressed and released on its own
-xcape
+# Super_L + Return key when Shift_L is pressed and released on its own
+# Escape key when Control_L is pressed and released on its own
+# otherwise, mod keys funcitioning as usual
+xcape -e 'Shift_L=Super_L|Return;Control_L=Escape'
 
 # run dwm
 exec ~/mybin/dwmstart.sh

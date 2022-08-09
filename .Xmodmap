@@ -1,20 +1,12 @@
 ! default key code 66 -> Capslock, 37 -> Control_L, 105 -> Control_R
 clear lock
 clear control
-clear mod4
 
 ! changing CapsLock into Control
 keycode 66 = Control_L
-
-! changing Left Control into Windows Key
-keycode 37 = Super_L
 
 ! changing Right Control into Capslock
 keycode 105 = Caps_Lock
 
 add lock = Caps_Lock
-add control = Control_L
-add mod4 = Super_L Super_R
-
-! as a result, there is an extra Windows key, one less Control key
-
+add control = Control_L Control_R
