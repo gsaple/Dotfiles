@@ -1,0 +1,106 @@
+# OPTIONS
+set shell sh
+set shellopts '-eu'
+set ifs "\n"
+set hidden
+set icons
+set truncatechar ''
+set promptfmt "\033[33;1m  %d\033[0m"
+set ratios '5:5'
+set scrolloff 10
+set wrapscroll
+set incsearch
+
+# the following two executables are for file preview, copied from Luke Smith, can be found at
+# https://github.com/LukeSmithxyz/voidrice/tree/master/.config/lf
+set previewer '~/.config/lf/scope'
+set cleaner '~/.config/lf/cleaner'
+
+# COMMANDS 
+# move current file or selected files to trash folder
+%mkdir -p ~/.trash
+cmd trash %set -f; mv $fx ~/.trash
+
+# delete file(s)
+cmd delete ${{
+    set -f
+    printf "$fx\n"
+    printf "delete? [y/n] "
+    read ans
+    [ "$ans" = "y" ] && rm -rf $fx
+}}
+
+# extract archives
+cmd extract ${{
+    set -f
+    case $f in
+      *.7z|*.a|*.ace|*.alz|*.arc|*.arj|*.bz|*.bz2|*.cab|*.cpio|*.deb|*.gz|*.jar|\
+      *.lha|*.lrz|*.lz|*.lzh|*.lzma|*.lzo|*.rar|*.rpm|*.rz|*.t7z|*.tar|*.tbz|\
+      *.tbz2|*.tgz|*.tlz|*.txz|*.tZ|*.tzo|*.war|*.xz|*.Z|*.zip) aunpack $f ;;
+    esac
+}}
+
+# compress current file or selected files with tar and gunzip
+cmd tar ${{
+    set -f
+    mkdir $1
+    cp -r $fx $1
+    tar czf $1.tar.gz $1
+    rm -rf $1
+}}
+
+# compress current file or selected files with zip
+cmd zip ${{
+    set -f
+    mkdir $1
+    cp -r $fx $1
+    zip -r $1.zip $1
+    rm -rf $1
+}}
+
+# open current file
+cmd open ${{
+    test -L $f && f=$(readlink -f $f)
+    case $(file --mime-type $f -b) in
+        image/vnd.djvu|application/pdf|application/octet-stream|application/postscript\
+	|application/vnd*|application/epub*) setsid -f zathura $fx >/dev/null 2>&1 ;;
+	text/troff) man -l $f ;;
+	text/*|application/json|inode/x-empty|application/pgp-encrypted) $EDITOR $fx ;;
+	image/svg+xml) display -- $f ;;
+	image/*) setsid -f sxiv $fx >/dev/null 2>&1;;
+	video/*) setsid -f mpv $f -quiet >/dev/null 2>&1;;
+    esac
+}}
+
+# create new directory and new file
+cmd new_dir $mkdir -p "$(echo $* | tr ' ' '\ ')"
+cmd new_file $touch "$(echo $* | tr ' ' '\ ')"
+
+# KEY BINDINGS
+map . set hidden! # toggle dot file
+map D trash # move to trash
+map <delete> delete # delete the file permanently
+map S :set info size; calcdirsize # calculate dir size
+map R rename # normal rename
+map C push R<c-u> # change all
+map r push R<a-b><c-b><c-u> # change file name if there is an extension
+map A push R<a-b><c-k> # change extension name if there an extension
+map B $vidir $fx # bluk rename files
+map b $wallpaper.sh w $f
+map f :set globsearch;filter # start filter
+map F :set noglobsearch; setfilter # end filter
+map <c-d> push :new_dir<space> # new directory
+map <c-f> push :new_file<space> # new file
+map <c-t> push :tar<space> # compress using tar
+map <c-z> push :zip<space> # compress using zip
+map E :extract # extract archive
+map Y $printf "%s" "$fx" | xclip -selection clipboard # copy file names
+map <c-_> $chmod +x $f;
+map <c-x> push <c-_><c-r> # make file executable
+# TODO:change dir e.g. map gh cd ~ 
+
+#map x $$f # execute current file (must be executable)
+#map X !$f # execute current file (must be executable)
+# dedicated keys for file opener actions
+#map o &mimeopen $f
+#map O $mimeopen --ask $f

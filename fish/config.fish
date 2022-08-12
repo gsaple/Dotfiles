@@ -4,9 +4,8 @@
 # no greeting message
 set -U fish_greeting
 
-# no autosuggestion by default
-#set -g fish_autosuggestion_enabled 0
-
+# enable autosuggestion by default
+set -g fish_autosuggestion_enabled 1
 
 # set prompt
 function fish_prompt
@@ -41,6 +40,10 @@ set fish_color_cancel brred
 alias l='exa -al --color=always --group-directories-first'
 alias d='edit_dot.sh'
 alias c="source $HOME/mybin/cdir.sh"
+alias e="exit"
+alias f="lfub"
+
+# git
 alias gc='git commit -m'
 alias gs='git status'
 alias gl='git log --pretty=oneline'
