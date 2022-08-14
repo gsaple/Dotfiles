@@ -22,6 +22,20 @@ function toggle_autosuggestion
     end
 end
 
+function lfcd
+    set tmp (mktemp)
+    lfub -last-dir-path=$tmp $argv
+    if test -f "$tmp"
+        set dir (cat $tmp)
+        rm -f $tmp
+        if test -d "$dir"
+            if test "$dir" != (pwd)
+                cd $dir
+            end
+        end
+    end
+end
+
 # line editing key bindings
 bind \ct toggle_autosuggestion
 bind , accept-autosuggestion
@@ -41,7 +55,7 @@ alias l='exa -al --color=always --group-directories-first'
 alias d='edit_dot.sh'
 alias c="source $HOME/mybin/cdir.sh"
 alias e="exit"
-alias f="lfub"
+alias f="lfcd"
 
 # git
 alias gc='git commit -m'
