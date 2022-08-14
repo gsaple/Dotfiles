@@ -7,7 +7,11 @@ IFS="$(printf '%b_' '\n')"; IFS="${IFS%_}"
 
 image() {
 	if [ -f "$1" ] && [ -n "$DISPLAY" ] && [ -z "$WAYLAND_DISPLAY" ] && command -V ueberzug >/dev/null 2>&1; then
-		printf '{"action": "add", "identifier": "PREVIEW", "x": "%s", "y": "%s", "width": "%s", "height": "%s", "scaler": "contain", "path": "%s"}\n' "$4" "$5" "$(($2-1))" "$(($3-1))" "$1" > "$FIFO_UEBERZUG"
+		width=$(($2 * 4 / 5))
+		height=$(($3 * 4 / 5))
+		x=$(($4 + $2 / 10))
+		y=$(($5 + $3 / 10))
+		printf '{"action": "add", "identifier": "PREVIEW", "x": "%s", "y": "%s", "width": "%s", "height": "%s", "scaler": "contain", "path": "%s"}\n' "$x" "$y" "$width" "$height" "$1" > "$FIFO_UEBERZUG"
 	else
 		mediainfo "$6"
 	fi
@@ -22,8 +26,7 @@ ifub() {
 # be regenerated once seen.
 
 case "$(file --dereference --brief --mime-type -- "$1")" in
-	#image/*) image "$1" "$2" "$3" "$4" "$5" "$1" ;;
-	image/*) image "$1" "$2" "$3" "$4" "$(($5+8))" "$1" ;; # only for monocle mode
+	image/*) image "$1" "$2" "$3" "$4" "$5" "$1" ;;
 	text/html) lynx -width="$4" -display_charset=utf-8 -dump "$1" ;;
 	text/troff) man ./ "$1" | col -b ;;
 	text/* | */xml | application/json) bat --terminal-width "$(($4-2))" -f "$1" ;;
@@ -37,8 +40,7 @@ case "$(file --dereference --brief --mime-type -- "$1")" in
 	*/pdf)
 		CACHE="${XDG_CACHE_HOME:-$HOME/.cache}/lf/thumb.$(stat --printf '%n\0%i\0%F\0%s\0%W\0%Y' -- "$(readlink -f "$1")" | sha256sum | cut -d' ' -f1)"
 		[ ! -f "$CACHE.jpg" ] && pdftoppm -jpeg -f 1 -singlefile "$1" "$CACHE"
-		image "$CACHE.jpg" "$2" "$3" "$(($4+15))" "$5" "$1" # only for monocle mode
-		#image "$CACHE.jpg" "$2" "$3" "$4" "$5" "$1"
+		image "$CACHE.jpg" "$2" "$3" "$4" "$5" "$1"
 		;;
 	*opendocument*) odt2txt "$1" ;;
 	application/pgp-encrypted) gpg -d -- "$1" ;;
