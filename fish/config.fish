@@ -56,6 +56,7 @@ alias d='edit_dot.sh'
 alias c="source $HOME/mybin/cdir.sh"
 alias e="exit"
 alias f="lfcd"
+alias n="neofetch"
 
 # git
 alias gc='git commit -m'
