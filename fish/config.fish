@@ -36,6 +36,11 @@ function lfcd
     end
 end
 
+# unibind (overwrite actually) some inconvenient predefined keybindings
+# to list all of them, run bind -k --preset
+bind \ev true
+bind \el true
+
 # line editing key bindings
 bind \ct toggle_autosuggestion
 bind , accept-autosuggestion
