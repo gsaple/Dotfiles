@@ -1,0 +1,9 @@
+set selection-notification false
+set selection-clipboard clipboard
+set page-padding 5
+
+#first-page-column a:b:c, meaning if there is 1 page per row, the first page will be on the the a_th column; if there are 2 pages per row, the first page will be on the b_th column; if there are >=3 pages per row, the first page will be on the c_th column.
+map D set "first-page-column 1:1"
+map <C-d> set "first-page-column 1:2"
+map w adjust_window width
+map W adjust_window best-fit
