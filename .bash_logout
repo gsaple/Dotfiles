@@ -6,3 +6,5 @@ rm -f $HOME/.lesshst
 rm -f $HOME/.bash_history
 rm -f $HOME/.dwm.log
 rm -f .serverauth.*
+rm -rf $HOME/.trash/*
+rm -rf $HOME/.cache/tracker3
