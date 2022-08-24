@@ -115,18 +115,18 @@ selected_bg_color="Blue"
 # All widgets must have the type value set to one of ["cpu", "mem", "proc", "net", "temp", "disk", "empty"].
 # All layout components have a ratio value - if this is not set, then it defaults to 1.
 # The default widget layout:
-[[row]]
-  ratio=1
-  [[row.child]]
-  type="net"
-[[row]]
-    ratio=1
-    [[row.child]]
-      ratio=1
-      type="proc"
-    [[row.child]]
-      ratio=1
-      type="disk"
+#[[row]]
+#  ratio=1
+#  [[row.child]]
+#  type="net"
+#[[row]]
+#    ratio=1
+#    [[row.child]]
+#      ratio=1
+#      type="proc"
+#    [[row.child]]
+#      ratio=1
+#      type="disk"
 #      [[row.child.child]]
 #        type="temp"
 #      [[row.child.child]]
@@ -149,12 +149,12 @@ selected_bg_color="Blue"
 #case_sensitive = false
 #whole_word = false
 
-[mount_filter]
-is_list_ignored = true
-list = ["^/$", "/boot$"]
-regex = true
-case_sensitive = false
-whole_word = false
+#[mount_filter]
+#is_list_ignored = true
+#list = ["^/$", "/boot$"]
+#regex = true
+#case_sensitive = false
+#whole_word = false
 
 #[temp_filter]
 #is_list_ignored = true
