@@ -63,6 +63,8 @@ alias e="exit"
 alias f="lfcd"
 alias n="neofetch" # add '--off' opt if no ascii art is needed
 alias p="picom --experimental-backends -b"
+alias r="cmatrix -rm -u 20"
+alias pi="pipes.sh -B"
 
 # git
 alias gc='git commit -m'

@@ -20,7 +20,8 @@ toggle_bar.sh
 # Super_L + Return key when Super_L is pressed and released on its own
 # Escape key when Control_L is pressed and released on its own
 # otherwise, mod keys funcitioning as usual
-xcape -e 'Super_L=Super_L|Return;Control_L=Escape'
+# xcape -e 'Super_L=Super_L|Return;Control_L=Escape'
+xcape
 
 # run dwm
 exec ~/mybin/dwmstart.sh
