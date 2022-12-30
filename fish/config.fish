@@ -75,3 +75,7 @@ alias gl='git log --pretty=oneline'
 alias gp='git push'
 alias ga='git add .'
 alias gd='git diff'
+
+alias update='sudo dnf update --refresh'
+alias v='nvim'
+alias lg='lazygit'
