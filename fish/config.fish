@@ -9,6 +9,8 @@ set -g fish_autosuggestion_enabled 1
 
 # set prompt
 function fish_prompt
+    set_color -o blue
+    echo -n (basename $PWD)' '
     set_color bryellow
     echo -n '❯ '
 end
