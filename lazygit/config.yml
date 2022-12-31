@@ -1,0 +1,26 @@
+gui:
+  theme:
+    inactiveBorderColor:
+      - '#7c6f64'
+  showFileTree: false
+  showIcons: false
+  showBottomLine: false
+  showRandomTip: false
+  showCommandLog: false
+notARepository: 'quit'
+keybinding:
+  universal: # null for disable keybinding
+    edit: null
+    scrollLeft: null
+    scrollRight: null
+    return: '<esc>'
+    return-alt1: 'h' # seems not working?
+    goInto: 'l'
+    nextTab: '<c-l>'
+    prevTab: '<c-h>'
+    prevBlock-alt: '<c-k>'
+    nextBlock-alt: '<c-j>'
+  commits:
+    moveDownCommit: null
+    moveUpCommit: null
+    openLogMenu: null
