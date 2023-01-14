@@ -23,8 +23,9 @@ unmap a
 map s toggle_statusbar
 
 set highlight-color "#e06c75"
-set highlight-fg "#e06c75"
+set highlight-fg "#282828"
 set highlight-active-color "#528bff"
+set highlight-transparency 0.8
 
 set index-fg "#d4be98"
 set index-bg "#272e33"
