@@ -13,4 +13,5 @@ fish/functions
 fish/fish_variables
 simple-scan
 nvim
+chromium
 obs-studio
