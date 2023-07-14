@@ -24,4 +24,4 @@ toggle_bar.sh
 xcape
 
 # run dwm
-exec ~/mybin/dwmstart.sh
+exec ~/.local/bin/dwmstart.sh

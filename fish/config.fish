@@ -60,7 +60,7 @@ set fish_color_cancel brred
 # alias
 alias l='exa -al --color=always --group-directories-first'
 alias d='edit_dot.sh'
-alias c="source $HOME/mybin/cdir.sh"
+alias c="source $HOME/.local/bin/cdir.sh"
 alias e="exit"
 alias f="lfcd"
 alias n="neofetch" # add '--off' opt if no ascii art is needed
