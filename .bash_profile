@@ -14,11 +14,10 @@ export FZF_DEFAULT_OPTS="--border --info=inline --height=50% --prompt=' ' --p
 export GROFF_NO_SGR=1
 export MANPAGER="less -R --use-color -Dd+y -Du+b -s -M +Gg"
 
-# startup programs
-# get some status bar data in the background
-status_cache.sh
-
 # start window manager
 if [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]; then
     exec startx
 fi
+#if [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]; then
+#    exec startx
+#fi
