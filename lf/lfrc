@@ -6,11 +6,14 @@ set hidden
 set icons
 set truncatechar ''
 set promptfmt "\033[33;1m  %d\033[0m"
+set cursorpreviewfmt "\033[7m"
 set ratios '5:5'
 set scrolloff 10
 set wrapscroll
 set incsearch
-
+set autoquit
+set relativenumber
+set numberfmt "\033[38;2;94;81;70m"
 # the following two executables are for file preview, copied from Luke Smith, can be found at
 # https://github.com/LukeSmithxyz/voidrice/tree/master/.config/lf
 set previewer '~/.config/lf/scope'
@@ -98,6 +101,8 @@ map Y $printf "%s" "$fx" | xclip -selection clipboard # copy file names
 map <c-_> $chmod +x $f;
 map <c-x> push <c-_><c-r> # make file executable
 map P :set preview!; $exit # toggle preview
+cmap <enter> :cmd-enter; open
+cmap <down> :cmd-enter
 # TODO:change dir e.g. map gh cd ~ 
 
 #map x $$f # execute current file (must be executable)
