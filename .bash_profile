@@ -15,9 +15,6 @@ export GROFF_NO_SGR=1
 export MANPAGER="less -R --use-color -Dd+y -Du+b -s -M +Gg"
 
 # start window manager
-if [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]; then
-    exec startx
-fi
 #if [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]; then
 #    exec startx
 #fi
