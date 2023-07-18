@@ -5,7 +5,8 @@ export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_CACHE_HOME="$HOME/.cache"
 export PATH="$HOME/.local/bin:$PATH"
-export EDITOR=nvim
+export VISUAL=nvim
+export EDITOR="$VISUAL"
 
 # fzf interface
 export FZF_DEFAULT_OPTS="--border --info=inline --height=50% --prompt=' ' --pointer='|>' --margin 5% --color='bg+:blue,gutter:black,pointer:red,border:blue'"
