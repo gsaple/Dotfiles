@@ -62,6 +62,8 @@ cmd zip ${{
 }}
 
 # open current file
+# '--' indicate the end of command line options i.e. only args after --, no more options
+# setsid is to run program in a new session, detach the process from the terminal or shell
 cmd open ${{
     test -L $f && f=$(readlink -f $f)
     case $(file --mime-type $f -b) in
