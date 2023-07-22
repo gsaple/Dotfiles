@@ -21,8 +21,14 @@ set cleaner '~/.config/lf/cleaner'
 
 # COMMANDS 
 # move current file or selected files to trash folder
-%mkdir -p ~/.trash
-cmd trash %set -f; mv $fx ~/.trash
+cmd trash ${{
+    set -f
+    mkdir -p ~/.trash
+    readarray -t filenames <<< "$fx"
+    for file in "${filenames[@]}"; do
+        mv "$file" "$HOME/.trash/$(basename $file)_$(date +'%Y%m%d%H%M%S')"
+    done
+}}
 
 # delete file(s)
 cmd delete ${{
