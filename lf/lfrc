@@ -109,8 +109,7 @@ map Y $printf "%s" "$fx" | xclip -selection clipboard # copy file names
 map <c-_> $chmod +x $f;
 map <c-x> push <c-_><c-r> # make file executable
 map P :set preview!; $exit # toggle preview
-cmap <enter> :cmd-enter; open
-cmap <down> :cmd-enter
+cmap <c-l> :cmd-enter; open
 # TODO:change dir e.g. map gh cd ~ 
 
 #map x $$f # execute current file (must be executable)
