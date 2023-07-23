@@ -7,5 +7,5 @@ rm -f $HOME/.bash_history
 rm -f $HOME/.dwm.log
 rm -f .serverauth.*
 rm -rf $HOME/.cache/tracker3
-cd $HOME/.trash
-rm -rf ..?* .[!.]* *
+# first two for dot files
+rm -rf $HOME/.trash/..?* $HOME/.trash/.[!.]* $HOME/.trash/*
