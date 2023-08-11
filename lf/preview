@@ -8,6 +8,13 @@
 
 set -C -f
 
+# no need to preview cache
+file_path=$(readlink -f "$1")
+cache_dir="$HOME/.cache/lf"
+if [[ "$file_path" == "$cache_dir"* ]]; then
+    exit 1
+fi
+
 image() {
 	if [ -f "$1" ] && [ -n "$DISPLAY" ] && [ -z "$WAYLAND_DISPLAY" ] \
         && command -V ueberzugpp >/dev/null 2>&1; then
