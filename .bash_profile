@@ -8,6 +8,9 @@ export PATH="$HOME/.local/bin:$PATH"
 export VISUAL=nvim
 export EDITOR="$VISUAL"
 
+# do not use ksshaskpass
+#unset SSH_ASKPASS
+
 # fzf interface
 export FZF_DEFAULT_OPTS="--border --info=inline --height=50% --prompt=' ' --pointer='|>' --margin 5% --color='bg+:blue,gutter:black,pointer:red,border:blue'"
 
