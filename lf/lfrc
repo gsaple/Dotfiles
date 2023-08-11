@@ -47,6 +47,12 @@ cmd extract ${{
     esac
 }}
 
+# copy file name
+cmd copy_name ${{
+    base_name=$(basename "$f")
+    echo -n "$base_name" | xclip -selection clipboard
+}}
+
 # compress current file or selected files with tar and gunzip
 cmd tar ${{
     set -f
@@ -91,6 +97,7 @@ map D trash # move to trash
 map <delete> delete # delete the file permanently
 map S :set info size; calcdirsize # calculate dir size
 map R rename # normal rename
+#map c copy_name # copy base name
 map C push R<c-u> # change all
 map r push R<a-b><c-b><c-u> # change file name if there is an extension
 map A push R<a-b><c-k> # change extension name if there an extension
