@@ -1,3 +1,6 @@
+# empty trash
+source $HOME/.bash_logout
+
 # load X resources
 [[ -f ~/.Xresources ]] && xrdb -merge -I$HOME ~/.Xresources
 
