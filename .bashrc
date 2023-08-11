@@ -3,6 +3,9 @@
 # Source global definitions
 if [ -f /etc/bashrc ]; then
 	. /etc/bashrc
+# stop sourcing bashrc if it is a login_shell
+if shopt -q login_shell; then
+    return
 fi
 
 # Uncomment the following line if you don't like systemctl's auto-paging feature:
