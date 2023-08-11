@@ -26,7 +26,7 @@ end
 
 function lfcd
     set tmp (mktemp)
-    lfub -last-dir-path=$tmp $argv
+    lfubpp -last-dir-path=$tmp $argv
     if test -f "$tmp"
         set dir (cat $tmp)
         rm -f $tmp

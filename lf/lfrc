@@ -14,10 +14,8 @@ set incsearch
 set autoquit
 set relativenumber
 set numberfmt "\033[38;2;94;81;70m"
-# the following two executables are for file preview, copied from Luke Smith, can be found at
-# https://github.com/LukeSmithxyz/voidrice/tree/master/.config/lf
-set previewer '~/.config/lf/scope'
-set cleaner '~/.config/lf/cleaner'
+set previewer '~/.config/lf/preview'
+set cleaner '~/.config/lf/cleanerpp'
 
 # COMMANDS 
 # move current file or selected files to trash folder

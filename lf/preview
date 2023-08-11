@@ -1,0 +1,75 @@
+#!/bin/sh
+
+# this file is taken and modified from
+# https://github.com/jstkdng/ueberzugpp/blob/master/scripts/lf/preview
+
+# five arguments of THIS SCRIPT: (1) current file name, (2) width, (3) height,
+# (4) horizontal and (5) vertical position of preview pane respectively
+
+set -C -f
+
+image() {
+	if [ -f "$1" ] && [ -n "$DISPLAY" ] && [ -z "$WAYLAND_DISPLAY" ] \
+        && command -V ueberzugpp >/dev/null 2>&1; then
+        # make the image drawn at the central 80% of the preview pane
+		width=$(($2 * 4 / 5))
+		height=$(($3 * 4 / 5))
+		x=$(($4 + $2 / 10))
+		y=$(($5 + $3 / 10))
+        ueberzugpp cmd -s $UB_SOCKET -a add -i PREVIEW -x $x -y $y \
+            --max-width $width --max-height $height -f "$1"
+    else
+		mediainfo "$6"
+    fi
+    # this seems to be used for triggering cleanup func in lfubpp
+    exit 1
+}
+
+CACHE="$HOME/.cache/lf/thumbnail.$(stat --printf '%n\0%i\0%F\0%s\0%W\0%Y' -- \
+    "$(readlink -f "$1")" | sha256sum | awk '{print $1}'))"
+
+# file name
+FN=$(printf "%s\n" "$(readlink -f "$1")" | awk '{print tolower($0)}')
+# mime type
+MT=$(file --dereference --brief --mime-type -- "$1")
+
+case "$MT" in
+    image/*) image "$1" "$2" "$3" "$4" "$5" "$1" ;;
+    text/html) lynx -width="$(($2-1))" -display_charset=utf-8 -dump "$1" ;;
+    text/troff) man ./ "$1" | col -b ;;
+    text/* | */xml | application/json) bat --pager=never \
+        --terminal-width "$(($2-1))" -f "$1" ;;
+    application/zip | application/gzip | application/java-archive)
+        case "$FN" in
+            *.tgz|*.tar.gz) tar tzf "$1" ;;
+            *.tar.bz2|*.tbz2) tar tjf "$1" ;;
+            *.tar.txz|*.txz) xz --list "$1" ;;
+            *.tar) tar tf "$1" ;;
+            *.zip|*.jar|*.war|*.ear|*.oxt) unzip -l "$1" ;;
+            *.rar) unrar l "$1" ;;
+            *.7z) 7z l "$1" ;;
+        esac
+        ;;
+	audio/* | application/octet-stream) exiftool "$1" || exit 1 ;;
+    video/*)
+        [ ! -f "$CACHE" ] && ffmpegthumbnailer -i "$1" -o "$CACHE" -s 0
+        image "$CACHE" "$2" "$3" "$4" "$5" "$1"
+        ;;
+    */pdf)
+        [ ! -f "${CACHE}.jpg" ] && pdftoppm -jpeg -f 1 -singlefile "$1" "$CACHE"
+        image "${CACHE}.jpg" "$2" "$3" "$4" "$5" "$1"
+        ;;
+    *opendocument* | application/vnd.sun.xml.writer) odt2txt "$1" ;;
+    application/pgp-encrypted) gpg -d -- "$1" ;;
+    application/x-object | application/x-executable) banner "binary" ;;
+    application/x-bittorrent) transmission-show "$1" ;;
+    application/*image) iso-info --no-header "$1" ;;
+    application/msword) antiword "$1" | head -n "$(($3-2))" ;;
+    application/vnd*document) docx "$1" "$3" ;;
+    application/vnd*sheet | application/vnd.ms-excel)
+        ssconvert --export-type=Gnumeric_stf:stf_csv "$1" "fd://1" | bat --language=csv
+        ;;
+    *) echo "unknown type" ;;
+esac
+
+exit 0
