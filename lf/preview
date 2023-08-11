@@ -49,6 +49,7 @@ case "$MT" in
     application/zip | application/gzip | application/java-archive)
         case "$FN" in
             *.tgz|*.tar.gz) tar tzf "$1" ;;
+            *.gz) zcat "$1" ;;
             *.tar.bz2|*.tbz2) tar tjf "$1" ;;
             *.tar.txz|*.txz) xz --list "$1" ;;
             *.tar) tar tf "$1" ;;
@@ -76,6 +77,8 @@ case "$MT" in
     application/vnd*sheet | application/vnd.ms-excel)
         ssconvert --export-type=Gnumeric_stf:stf_csv "$1" "fd://1" | bat --language=csv
         ;;
+    font/sfnt) exiftool "$1" || exit 1 ;;
+    application/x-rpm) rpm -qlp "$1" ;;
     *) echo "unknown type" ;;
 esac
 
