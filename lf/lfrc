@@ -17,7 +17,7 @@ set numberfmt "\033[38;2;94;81;70m"
 set previewer '~/.config/lf/preview'
 set cleaner '~/.config/lf/cleanerpp'
 
-# COMMANDS 
+# COMMANDS
 # move current file or selected files to trash folder
 cmd trash ${{
     set -f
@@ -35,16 +35,6 @@ cmd delete ${{
     printf "delete? [y/n] "
     read ans
     [ "$ans" = "y" ] && rm -rf $fx
-}}
-
-# extract archives
-cmd extract ${{
-    set -f
-    case $f in
-      *.7z|*.a|*.ace|*.alz|*.arc|*.arj|*.bz|*.bz2|*.cab|*.cpio|*.deb|*.gz|*.jar|\
-      *.lha|*.lrz|*.lz|*.lzh|*.lzma|*.lzo|*.rar|*.rpm|*.rz|*.t7z|*.tar|*.tbz|\
-      *.tbz2|*.tgz|*.tlz|*.txz|*.tZ|*.tzo|*.war|*.xz|*.Z|*.zip) aunpack $f ;;
-    esac
 }}
 
 # copy file name
@@ -75,15 +65,26 @@ cmd zip ${{
 # '--' indicate the end of command line options i.e. only args after --, no more options
 # setsid is to run program in a new session, detach the process from the terminal or shell
 cmd open ${{
-    test -L $f && f=$(readlink -f $f)
-    case $(file --mime-type $f -b) in
-        image/vnd.djvu|application/pdf|application/octet-stream|application/postscript\
-	|application/vnd*|application/epub*) setsid -f zathura $fx >/dev/null 2>&1 ;;
-	text/troff) man -l $f ;;
-	text/*|application/json|inode/x-empty|application/pgp-encrypted) $EDITOR $fx ;;
-	image/svg+xml) display -- $f ;;
-	image/*) setsid -f sxiv $fx >/dev/null 2>&1;;
-	video/*) setsid -f mpv $f -quiet >/dev/null 2>&1;;
+    # file name
+    FN=$(printf "%s\n" "$(readlink -f "$f")" | awk '{print tolower($0)}')
+    # mime type
+    MT=$(file --dereference --brief --mime-type -- "$f")
+
+    case "$MT" in
+        application/zip | application/gzip | application/java-archive)
+            case "$FN" in
+                *.zip) unzip $f ;;
+                *.tar.gz) tar xzvf $f ;;
+            esac
+            ;;
+        application/pdf) setsid -f zathura $f >/dev/null 2>&1 ;;
+        text/troff) man -l $f ;;
+        text/*) $EDITOR $fx ;;
+        #image/svg+xml) setsid -f display $f >/dev/null 2>&1 ;;
+        image/svg+xml) ;; # do nothing
+        image/*) setsid -f sxiv $f >/dev/null 2>&1 ;;
+        video/*) setsid -f mpv $f -quiet >/dev/null 2>&1 ;;
+        *) lf -remote "send $id echo nothing setup to open mime: $MT" ;;
     esac
 }}
 
@@ -109,7 +110,6 @@ map <c-d> push :new_dir<space> # new directory
 map <c-f> push :new_file<space> # new file
 map <c-t> push :tar<space> # compress using tar
 map <c-z> push :zip<space> # compress using zip
-map E :extract # extract archive
 map Y $printf "%s" "$fx" | xclip -selection clipboard # copy file names
 map <c-_> $chmod +x $f;
 map <c-x> push <c-_><c-r> # make file executable
@@ -117,8 +117,3 @@ map P :set preview!; $exit # toggle preview
 cmap <c-l> :cmd-enter; open
 # TODO:change dir e.g. map gh cd ~ 
 
-#map x $$f # execute current file (must be executable)
-#map X !$f # execute current file (must be executable)
-# dedicated keys for file opener actions
-#map o &mimeopen $f
-#map O $mimeopen --ask $f
