@@ -58,7 +58,7 @@ set fish_color_error brred
 set fish_color_cancel brred
 
 # alias
-alias l='exa -al --color=always --group-directories-first'
+alias l='eza -al --color=always --group-directories-first'
 alias d='edit_dot.sh'
 alias c="source $HOME/.local/bin/cdir.sh"
 alias e="exit"
