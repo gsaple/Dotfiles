@@ -1,8 +1,3 @@
-# .bashrc
-
-# Source global definitions
-if [ -f /etc/bashrc ]; then
-	. /etc/bashrc
 # stop sourcing bashrc if it is a login_shell
 if shopt -q login_shell; then
     return
@@ -27,3 +22,4 @@ if [[ $(ps --no-header --pid=$PPID --format=comm) != "fish"\
 fi
 
 PS1='$ '
+. "$HOME/.cargo/env"

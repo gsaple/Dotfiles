@@ -31,3 +31,4 @@ set index-fg "#d4be98"
 set index-bg "#272e33"
 set index-active-fg "#e06c75"
 set index-active-bg "#2c3338"
+set sandbox none

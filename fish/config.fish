@@ -76,8 +76,18 @@ alias gp='git push'
 alias ga='git add .'
 alias gd='git diff'
 
-alias update='sudo dnf update --refresh'
+alias up='sudo zypper refresh && sudo zypper dup'
+alias se='zypper se'
+alias ins='sudo zypper install'
 alias v='nvim'
 alias lg='lazygit'
+alias myip='curl ipinfo.io/ip'
 alias mt='mount /media/macbook/usb'
 alias umt='umount /media/macbook/usb'
+#alias start_db='pg_ctl -D /home/carbon/.local/pgsql/data start'
+alias close_db='pg_ctl -D /home/carbon/.local/pgsql/data stop'
+#nmcli device wifi connect iPhone password K4ss-CX3k
+#nmcli connection up id wlp4s0
+
+#sudo chmod -t /run/postgresql/
+#sudo chown carbon /run/postgresql/
