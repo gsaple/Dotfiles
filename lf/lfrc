@@ -76,10 +76,11 @@ cmd open ${{
     MT=$(file --dereference --brief --mime-type -- "$f")
 
     case "$MT" in
-        application/zip | application/gzip | application/java-archive)
+        application/zip | application/gzip | application/java-archive |  application/x-xz)
             case "$FN" in
                 *.zip) unzip $f ;;
                 *.tar.gz) tar xzvf $f ;;
+                *.tar.xz) tar xvf $f ;;
             esac
             ;;
         application/pdf) setsid -f zathura $f >/dev/null 2>&1 ;;
@@ -120,5 +121,7 @@ map <c-_> $chmod +x $f;
 map <c-x> push <c-_><c-r> # make file executable
 map P :set preview!; $exit # toggle preview
 cmap <c-l> :cmd-enter; open
-# TODO:change dir e.g. map gh cd ~ 
+
+# TODO:change dir e.g. map gh cd ~
+map gd cd ~/Downloads
 

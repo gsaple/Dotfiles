@@ -46,9 +46,10 @@ case "$MT" in
     text/troff) man ./ "$1" | col -b ;;
     text/* | */xml | application/json) bat --pager=never \
         --terminal-width "$(($2-1))" -f "$1" ;;
-    application/zip | application/gzip | application/java-archive)
+    application/zip | application/gzip | application/java-archive | application/x-xz )
         case "$FN" in
             *.tgz|*.tar.gz) tar tzf "$1" ;;
+            *.tar.xz) tar tf "$1" ;;
             *.gz) zcat "$1" ;;
             *.tar.bz2|*.tbz2) tar tjf "$1" ;;
             *.tar.txz|*.txz) xz --list "$1" ;;
