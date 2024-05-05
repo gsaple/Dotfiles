@@ -21,10 +21,10 @@ set cleaner '~/.config/lf/cleanerpp'
 # move current file or selected files to trash folder
 cmd trash ${{
     set -f
-    mkdir -p ~/.trash
     readarray -t filenames <<< "$fx"
     for file in "${filenames[@]}"; do
-        mv "$file" "$HOME/.trash/$(basename $file)_$(date +'%Y%m%d%H%M%S')"
+        #mv "$file" "$HOME/.local/share/Trash/files/$(basename $file)_$(date +'%Y%m%d%H%M%S')"
+        kioclient move $file trash:/
     done
 }}
 
@@ -109,7 +109,6 @@ map C push R<c-u> # change all
 map r push R<a-b><c-b><c-u> # change file name if there is an extension
 map A push R<a-b><c-k> # change extension name if there an extension
 map B $vidir $fx # bluk rename files
-map b $wallpaper.sh w $f
 map f :set globsearch;filter # start filter
 map F :set noglobsearch; setfilter # end filter
 map <c-d> push :new_dir<space> # new directory

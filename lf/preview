@@ -16,8 +16,8 @@ if [[ "$file_path" == "$cache_dir"* ]]; then
 fi
 
 image() {
-	if [ -f "$1" ] && [ -n "$DISPLAY" ] && [ -z "$WAYLAND_DISPLAY" ] \
-        && command -V ueberzugpp >/dev/null 2>&1; then
+	if [ -f "$1" ] && [ -n "$DISPLAY" ] && command -V ueberzugpp >/dev/null 2>&1;
+    then
         # make the image drawn at the central 80% of the preview pane
 		width=$(($2 * 4 / 5))
 		height=$(($3 * 4 / 5))
@@ -80,7 +80,7 @@ case "$MT" in
         ;;
     font/sfnt) exiftool "$1" || exit 1 ;;
     application/x-rpm) rpm -qlp "$1" ;;
-    *) echo "unknown type" ;;
+    *) echo -e "no previewer has set up for such MIME type:\n$MT" ;;
 esac
 
 exit 0
