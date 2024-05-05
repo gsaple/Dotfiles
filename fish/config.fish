@@ -64,7 +64,7 @@ alias c="source $HOME/.local/bin/cdir.sh"
 alias e="exit"
 alias f="lfcd"
 alias n="neofetch" # add '--off' opt if no ascii art is needed
-alias p="picom -b"
+#alias p="picom -b"
 alias r="cmatrix -rm -u 20"
 alias pi="pipes.sh -B"
 
@@ -75,19 +75,6 @@ alias gl='git log --pretty=oneline'
 alias gp='git push'
 alias ga='git add .'
 alias gd='git diff'
-
-alias up='sudo zypper refresh && sudo zypper dup'
-alias se='zypper se'
-alias ins='sudo zypper install'
 alias v='nvim'
 alias lg='lazygit'
 alias myip='curl ipinfo.io/ip'
-alias mt='mount /media/macbook/usb'
-alias umt='umount /media/macbook/usb'
-#alias start_db='pg_ctl -D /home/carbon/.local/pgsql/data start'
-alias close_db='pg_ctl -D /home/carbon/.local/pgsql/data stop'
-#nmcli device wifi connect iPhone password K4ss-CX3k
-#nmcli connection up id wlp4s0
-
-#sudo chmod -t /run/postgresql/
-#sudo chown carbon /run/postgresql/
