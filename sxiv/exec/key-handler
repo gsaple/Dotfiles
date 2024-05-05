@@ -1,12 +1,1 @@
 #!/bin/sh
-while read file
-do
-        case "$1" in
-        "d")
-                mv "$file" ~/.trash ;;
-        "c")
-                echo -n "$file" | xclip -selection clipboard ;;
-        "w")
-                wallpaper.sh w "$file" ;;
-        esac
-done
