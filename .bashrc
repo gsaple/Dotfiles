@@ -6,6 +6,11 @@ fi
 # Uncomment the following line if you don't like systemctl's auto-paging feature:
 #export SYSTEMD_PAGER=
 
+# Source global definitions
+if [ -f /etc/bashrc ]; then
+    . /etc/bashrc
+fi
+
 # User specific aliases and functions
 if [ -d ~/.bashrc.d ]; then
 	for rc in ~/.bashrc.d/*; do
@@ -20,6 +25,3 @@ if [[ $(ps --no-header --pid=$PPID --format=comm) != "fish"\
 	&& -z ${BASH_EXECUTION_STRING} ]]; then
     exec fish
 fi
-
-PS1='$ '
-. "$HOME/.cargo/env"

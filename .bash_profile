@@ -4,7 +4,7 @@
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_CACHE_HOME="$HOME/.cache"
-#export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
 export VISUAL=nvim
 export EDITOR="$VISUAL"
 
@@ -18,13 +18,7 @@ export FZF_DEFAULT_OPTS="--border --info=inline --height=50% --prompt=' ' --p
 export GROFF_NO_SGR=1
 export MANPAGER="less -R --use-color -Dd+y -Du+b -s -M +Gg"
 
-# change input method
-export GTK_IM_MODULE=fcitx
-export QT_IM_MODULE=fcitx
-export XMODIFIERS=@im=fcitx
-
-# start window manager
-#if [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]; then
-#    exec startx
-#fi
-. "$HOME/.cargo/env"
+# change input method (This may not be needed in X11)
+#export GTK_IM_MODULE=fcitx
+#export QT_IM_MODULE=fcitx
+#export XMODIFIERS=@im=fcitx
