@@ -68,6 +68,7 @@ alias n="neofetch" # add '--off' opt if no ascii art is needed
 alias r="cmatrix -rm -u 20"
 alias pi="pipes.sh -B"
 alias m="ncmpcpp"
+alias dictoffline="sdcv"
 
 # git
 alias gc='git commit -m'
