@@ -76,11 +76,12 @@ cmd open ${{
     MT=$(file --dereference --brief --mime-type -- "$f")
 
     case "$MT" in
-        application/zip | application/gzip | application/java-archive |  application/x-xz)
+        application/zip | application/gzip | application/java-archive |  application/x-xz | application/x-bzip2)
             case "$FN" in
                 *.zip) unzip $f ;;
                 *.tar.gz) tar xzvf $f ;;
                 *.tar.xz) tar xvf $f ;;
+                *.tar.bz2) tar xjvf $f ;;
             esac
             ;;
         application/pdf) setsid -f zathura $f >/dev/null 2>&1 ;;
